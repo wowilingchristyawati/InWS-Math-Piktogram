@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Worksheet - Miss Isty</title>
+
+<style>
+    body {
+        margin: 0;
+        background: linear-gradient(to bottom right, #c7dbff, #f9faff);
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    .container {
+        background: white;
+        width: 95%;
+        max-width: 850px;
+        padding: 35px;
+        border-radius: 25px;
+        box-shadow: 0 0 25px rgba(0,0,0,0.12);
+        text-align: center;
+        animation: fadeIn 0.6s ease;
+    }
+
+    .page { display: none; }
+    .active { display: block; }
+
+    h1, h2 {
+        color: #1a237e;
+        font-weight: 700;
+    }
+
+    .school-img {
+        width: 220px;
+        margin-bottom: 15px;
+    }
+
+    .mascot {
+        width: 130px;
+        margin: 20px auto;
+    }
+
+    input {
+        padding: 12px;
+        width: 80%;
+        max-width: 320px;
+        font-size: 1.1em;
+        border-radius: 12px;
+        border: 2px solid #90a4ae;
+        margin-top: 15px;
+    }
+
+    button {
+        padding: 12px 28px;
+        background: #3949ab;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1em;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #5c6bc0;
+    }
+
+    iframe {
+        width: 100%;
+        height: 450px;
+        border: none;
+        border-radius: 20px;
+        margin-top: 15px;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .footer {
+        margin-top: 25px;
+        font-size: 0.9em;
+        color: #555;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- PAGE 1: INPUT NAMA -->
+    <div id="nameScreen" class="page active">
+        <img class="school-img" src="https://i.imgur.com/Y9k5R0S.png" alt="school">
+
+        <h1>Interactive Worksheet</h1>
+        <p style="color:#444; font-size:1.05em;">
+            Miss Isty - Contextual Teaching & Learning
+        </p>
+
+        <input type="text" id="namaSiswa" placeholder="Masukkan Nama Kamu">
+        <br>
+        <button onclick="goToGreeting()">Lanjut</button>
+    </div>
+
+    <!-- PAGE 2: GREETING -->
+    <div id="greetingScreen" class="page">
+        <img class="mascot" src="https://i.imgur.com/Ew7V6IG.png" alt="mascot">
+
+        <h2 id="greetText"></h2>
+        <p style="font-size:1.1em; color:#333;">
+            Siapkan diri untuk menganalisa soal-soal yang disediakan.<br>
+            Tetap semangat dan fokus ya!
+        </p>
+
+        <button onclick="goToWorksheet()">Mulai Belajar</button>
+    </div>
+
+    <!-- PAGE 3: WORDWALL -->
+    <div id="worksheetScreen" class="page">
+        <h2>Selamat belajar!</h2>
+
+        <iframe style="max-width:100%"
+        src="https://wordwall.net/embed/10f31db225754ee1a594395b6a7011d3?themeId=65&templateId=5&fontStackId=12"
+        allowfullscreen>
+        </iframe>
+
+        <div class="footer">Powered by Wordwall · Created by Miss Isty</div>
+    </div>
+
+</div>
+
+<script>
+function goToGreeting() {
+    let nama = document.getElementById("namaSiswa").value;
+
+    if (nama.trim() === "") {
+        alert("Silakan isi nama terlebih dahulu.");
+        return;
+    }
+
+    document.getElementById("nameScreen").classList.remove("active");
+    document.getElementById("greetingScreen").classList.add("active");
+
+    document.getElementById("greetText").innerText =
+        "Hai " + nama + "! Selamat datang di Interactive Worksheet by Miss Isty.";
+}
+
+function goToWorksheet() {
+    document.getElementById("greetingScreen").classList.remove("active");
+    document.getElementById("worksheetScreen").classList.add("active");
+}
+</script>
+
+</body>
+</html>
